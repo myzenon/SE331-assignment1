@@ -1,0 +1,25 @@
+<div class="row page-header">
+    <h2>
+        <span class="glyphicon glyphicon-th-list"></span>
+        List Product
+    </h2>
+</div>
+<div class="row">
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor="let product of products">
+            <div class="detail-box">
+                <button class="btn btn-primary" (click)="messagebox(product)">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </div>
+            <div>
+                <h4>
+                    {{ product.name }}
+                </h4>
+            </div>
+            <div>
+                {{ truncateDesc(product.description) }}
+            </div>
+        </li>
+    </ul>
+</div>

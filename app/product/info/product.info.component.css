@@ -1,0 +1,16 @@
+.info-box {
+    background-color: #F0F4C3;
+    border-radius: 10px;
+    padding: 30px;
+    margin: 0px 0px 30px 0px;
+}
+.info-label {
+    text-align: right;
+    font-weight: bold;
+}
+hr {
+    border-color: #CCC;
+}
+h3 {
+    margin: 0;
+}
