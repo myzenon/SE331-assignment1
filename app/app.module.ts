@@ -1,3 +1,4 @@
+import { ProductRoutingModule } from './product/product-routing';
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { FormsModule } from '@angular/forms'
@@ -16,7 +17,7 @@ import { ProductDataFileService } from './services/product-data-file.service'
 		ProductListComponent,
 		ProductInfoComponent
 	],
-	imports: [ BrowserModule, FormsModule ],
+	imports: [ BrowserModule, FormsModule, ProductRoutingModule ],
 	bootstrap: [ AppComponent ],
 	providers: [ ProductDataFileService ]
 })
