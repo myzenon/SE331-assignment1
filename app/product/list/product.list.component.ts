@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component } from '@angular/core'
 import { ProductDataFileService } from '../../services/product-data-file.service'
 
@@ -8,7 +9,7 @@ import { ProductDataFileService } from '../../services/product-data-file.service
 })
 export class ProductListComponent {
 
-    constructor(private productDataFileService : ProductDataFileService) {}
+    constructor(private productDataFileService : ProductDataFileService, private router : Router) {}
 
     products = this.productDataFileService.getProducts()
 
@@ -34,6 +35,10 @@ export class ProductListComponent {
             -------------------------------------
             ${product.description}
         `)
+    }
+
+    goToInfoPage(product) {
+        this.router.navigate(['/info/' + product.id]);
     }
 
 }

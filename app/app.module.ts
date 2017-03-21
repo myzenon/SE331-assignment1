@@ -1,3 +1,4 @@
+import { MenuComponent } from './menu/menu.component';
 import { products } from './product/mock';
 import { ProductRoutingModule } from './product/product-routing';
 import { NgModule } from '@angular/core'
@@ -17,7 +18,8 @@ import { ProductDataFileService } from './services/product-data-file.service'
 		AppComponent,
 		ProductAddComponent,
 		ProductListComponent,
-		ProductInfoComponent
+		ProductInfoComponent,
+		MenuComponent
 	],
 	imports: [ BrowserModule, FormsModule, ProductRoutingModule ],
 	bootstrap: [ AppComponent ],
