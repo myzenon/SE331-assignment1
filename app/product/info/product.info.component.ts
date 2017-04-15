@@ -21,7 +21,7 @@ export class ProductInfoComponent {
     }
 
     ngOnInit() {
-       this.route.params.switchMap((params: Params) => this.productDataServerService.getProduct(+params['id'])).subscribe((product) => {
+       this.route.params.switchMap((params: Params) => this.productDataServerService.getProduct(+params['id'])).subscribe((product: Product) => {
          if(product) {
            this.product = product;
            this.isNoData = false;
