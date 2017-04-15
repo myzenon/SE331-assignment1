@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { Component } from '@angular/core'
-import { ProductDataFileService } from '../../services/product-data-file.service'
+import {ProductDataServerService} from "../../services/product-data-server.service";
+import {Product} from "../product";
 
 @Component({
     selector: 'product-list',
@@ -9,9 +10,13 @@ import { ProductDataFileService } from '../../services/product-data-file.service
 })
 export class ProductListComponent {
 
-    constructor(private productDataFileService : ProductDataFileService, private router : Router) {}
+    products: Product[];
 
-    products = this.productDataFileService.getProducts()
+    constructor(private productDataServerService: ProductDataServerService, private router: Router) {}
+
+    ngOnInit() {
+      this.productDataServerService.getProducts().subscribe((products) => this.products = products);
+    }
 
     truncateDesc(desc) {
         if(desc.length > 50) {

@@ -1,8 +1,9 @@
 import { Product } from './../product';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Component } from '@angular/core'
-import { ProductDataFileService } from '../../services/product-data-file.service'
+import {ProductDataServerService} from "../../services/product-data-server.service";
 import 'rxjs/add/operator/switchMap'
+
 
 @Component({
     selector: 'product-info',
@@ -10,14 +11,21 @@ import 'rxjs/add/operator/switchMap'
     styleUrls : ['app/product/info/product.info.component.css']
 })
 export class ProductInfoComponent {
-    constructor(private productDataFileService : ProductDataFileService, private route : ActivatedRoute) {}
-    product : Product
+
+    product: Product;
+    isNoData = true;
+    constructor(private productDataServerService: ProductDataServerService, private route: ActivatedRoute) {}
 
     nl2br(desc) {
-        return desc.replace(/\n/g,"<br>")
+        return desc.replace(/\n/g, '<br>');
     }
 
     ngOnInit() {
-       this.route.params.switchMap((params : Params) => this.productDataFileService.getProduct(+params['id'])).subscribe((product) => this.product = product)
+       this.route.params.switchMap((params: Params) => this.productDataServerService.getProduct(+params['id'])).subscribe((product) => {
+         if(product) {
+           this.product = product;
+           this.isNoData = false;
+         }
+       });
     }
 }

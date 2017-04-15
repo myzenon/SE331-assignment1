@@ -1,6 +1,7 @@
-import { Component, ElementRef, ViewChild  } from '@angular/core'
-import { Product } from '../product'
-import { ProductDataFileService } from '../../services/product-data-file.service'
+import { Component, ElementRef, ViewChild  } from '@angular/core';
+import { Product } from '../product';
+import {ProductDataServerService} from "../../services/product-data-server.service";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'product-add',
@@ -9,34 +10,33 @@ import { ProductDataFileService } from '../../services/product-data-file.service
 })
 export class ProductAddComponent {
 
-    @ViewChild('inputPicture') inputPicture
+    @ViewChild('inputPicture') inputPicture: ElementRef;
+    newProduct: Product = new Product();
 
-    constructor(private productDataFileService : ProductDataFileService) {}
+    constructor(private productDataServerService: ProductDataServerService, private router: Router) {}
 
-    newProduct : Product = new Product()
-
-    addPicture() {
-        this.newProduct.picture = this.inputPicture.nativeElement.files[0].name
-    }
+    // addPicture() {
+    //     this.newProduct.picture = this.inputPicture.nativeElement.files[0].name;
+    // }
 
     resetForm() {
-        this.inputPicture.nativeElement.value = ''
-        this.newProduct = new Product()
+        this.inputPicture.nativeElement.value = '';
+        this.newProduct = new Product();
     }
 
     addProduct() {
-        if(
-            this.newProduct.id !== undefined &&
+        if (
+            // this.newProduct.id !== undefined &&
             this.newProduct.name !== undefined &&
             this.newProduct.description !== undefined &&
-            this.newProduct.picture !== undefined &&
             this.newProduct.price !== undefined &&
             this.newProduct.amount !== undefined &&
             this.newProduct.rating !== undefined
         ) {
-            this.productDataFileService.addProduct(this.newProduct)
-            this.messagebox(this.newProduct)
-            this.resetForm()
+            let inputPictureEl: HTMLInputElement = this.inputPicture.nativeElement;
+            this.productDataServerService.addProduct(this.newProduct, inputPictureEl.files.item(0)).subscribe(() => this.router.navigate(['/list']));
+            // this.messagebox(this.newProduct);
+            this.resetForm();
         }
     }
 
@@ -54,6 +54,6 @@ export class ProductAddComponent {
             Description
             -------------------------------------
             ${product.description}
-        `)
+        `);
     }
 }
