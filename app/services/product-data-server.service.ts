@@ -6,7 +6,12 @@ import {Http, Headers, RequestOptions} from '@angular/http';
 @Injectable()
 export class ProductDataServerService {
 
-  serverUrl = 'http://localhost:8080';
+  // Local
+  // serverUrl = 'http://localhost:8080';
+
+  // Remote
+  serverUrl = 'http://54.245.217.104:8080/onlineshop';
+
   productPath = this.serverUrl + '/product';
 
   constructor(private http: Http) {
